@@ -32,7 +32,7 @@ class EmployeeDetailsScreen extends ConsumerWidget {
             },
             child: const Icon(
               Icons.arrow_back_rounded,
-              color: AppColors.primaryShade900,
+              color: AppColors.white,
             ),
           ),
           centerTitle: true,

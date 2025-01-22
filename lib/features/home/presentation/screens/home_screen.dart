@@ -47,6 +47,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
+        automaticallyImplyLeading: false,
         elevation: 4,
         centerTitle: true,
         shadowColor: Colors.black.withOpacity(0.5),

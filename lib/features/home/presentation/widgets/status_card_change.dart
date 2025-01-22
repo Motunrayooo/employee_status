@@ -39,8 +39,8 @@ class StatusCardChange extends StatelessWidget {
       // color: _getStatusColor(newStatus),
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 8.w,
-          vertical: 4.h,
+          horizontal: 12.w,
+          vertical: 6.h,
         ),
         child: Column(
           children: [
@@ -49,7 +49,7 @@ class StatusCardChange extends StatelessWidget {
               style: context.textTheme.bodyMedium?.copyWith(
                 color: AppColors.black,
                 fontSize: 15.sp,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w400,
               ),
               textAlign: TextAlign.center,
             ),
