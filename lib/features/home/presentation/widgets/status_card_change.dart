@@ -53,6 +53,7 @@ class StatusCardChange extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
+            if(newStatus != EmploymentStatus.termination)
             8.hi,
             DetailsTile(
               prefix: 'New Salary:',

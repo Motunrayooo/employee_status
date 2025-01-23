@@ -3,7 +3,6 @@ import 'package:employee_status/core/utils/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 import '../../../../core/common_widgets/app_textfield.dart';
 import '../../../../core/common_widgets/app_loader.dart';
 import '../../../../core/utils/app_colors.dart';
@@ -103,26 +102,31 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             itemCount: filterEmployees.length,
                             itemBuilder: (context, index) {
                               final employee = filterEmployees[index];
+                              return Column(
+                                children: [
+                                  EmployeeTile(
+                                    onTap: () {
+                                      ref
+                                          .read(
+                                              employeeIdStateProvider.notifier)
+                                          .state = employee.id ?? 0;
 
-                              return EmployeeTile(
-                                onTap: () {
-                                  ref
-                                      .read(employeeIdStateProvider.notifier)
-                                      .state = employee.id ?? 0;
-
-
-
-                                  context.push(
-                                    MaterialPageRoute(builder: (context) {
-                                      return const EmployeeDetailsScreen();
-                                    }),
-                                  );
-                                },
-                                name:
-                                    '${employee.firstName} ${employee.lastName}',
-                                designation: employee.designation ?? '',
-                                level: employee.level.toString(),
-                              ).padVertical(10);
+                                      context.push(
+                                        MaterialPageRoute(builder: (context) {
+                                          return const EmployeeDetailsScreen();
+                                        }),
+                                      );
+                                    },
+                                    name:
+                                        '${employee.firstName} ${employee.lastName}',
+                                    designation: employee.designation ?? '',
+                                    level: employee.level.toString(),
+                                  ).padVertical(10),
+                                  10.hi,
+                                  if (index == filterEmployees.length - 1)
+                                    60.hi,
+                                ],
+                              );
                             },
                           ),
                         ),
