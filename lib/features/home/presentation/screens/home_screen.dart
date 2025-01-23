@@ -2,7 +2,7 @@ import 'package:employee_status/core/utils/extensions.dart';
 import 'package:employee_status/core/utils/show_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+
 
 import '../../../../core/common_widgets/app_textfield.dart';
 import '../../../../core/common_widgets/app_loader.dart';
@@ -10,6 +10,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/themes/app_theme.dart';
 import '../../logic/employee_notifier.dart';
 import '../widgets/employee_tile.dart';
+import 'employee_details_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -25,6 +26,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ref.read(employeeStateProvider.notifier).fetchEmployees();
+      ref.read(filterStateProvider.notifier).state = '';
     });
     super.initState();
   }
@@ -34,14 +36,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final employees = ref.watch(employeeStateProvider);
     final isLoading = ref.watch(employeeStateProvider.notifier).state.isEmpty;
     final filter = ref.watch(filterStateProvider);
-    final filterEmployees = employees.where((employee) {
-      final name = '${employee.firstName} ${employee.lastName}'.toLowerCase();
-      final designation = employee.designation?.toLowerCase();
-      final level = employee.level.toString();
-      return name.contains(filter.toLowerCase()) ||
-          designation!.contains(filter.toLowerCase()) ||
-          level.contains(filter);
-    }).toList();
+    final filterEmployees = filter.isEmpty
+        ? employees
+        : employees.where((employee) {
+            final name =
+                '${employee.firstName} ${employee.lastName}'.toLowerCase();
+            final designation = employee.designation?.toLowerCase();
+            final level = employee.level.toString();
+            return name.contains(filter.toLowerCase()) ||
+                designation!.contains(filter.toLowerCase()) ||
+                level.contains(filter);
+          }).toList();
 
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
@@ -105,7 +110,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       .read(employeeIdStateProvider.notifier)
                                       .state = employee.id ?? 0;
 
-                                  context.go('/details');
+
+
+                                  context.push(
+                                    MaterialPageRoute(builder: (context) {
+                                      return const EmployeeDetailsScreen();
+                                    }),
+                                  );
                                 },
                                 name:
                                     '${employee.firstName} ${employee.lastName}',

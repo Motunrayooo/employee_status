@@ -22,11 +22,11 @@ class EmployeeNotifier extends StateNotifier<List<EmployeeResModel>> {
   }
 }
 
-final filterStateProvider = StateProvider((ref) => '');
+final filterStateProvider = StateProvider.autoDispose((ref) => '');
 final employeeIdStateProvider = StateProvider<int>((ref) => 0);
 
 final employeeStateProvider =
-    StateNotifierProvider<EmployeeNotifier, List<EmployeeResModel>>(
+    StateNotifierProvider.autoDispose<EmployeeNotifier, List<EmployeeResModel>>(
   (ref) => EmployeeNotifier(),
 );
 

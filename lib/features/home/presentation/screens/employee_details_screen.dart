@@ -45,7 +45,7 @@ class EmployeeDetailsScreen extends ConsumerWidget {
             ),
           ),
         ),
-        body: Column(
+        body: ListView(
           children: [
             100.hi,
             Material(
